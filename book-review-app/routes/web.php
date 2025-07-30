@@ -1,13 +1,26 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-Route::get('account/register',[AccountController::class,'register'])->name('account.register');
-Route::post('account/register',[AccountController::class,'processRegister'])->name('account.processRegister');
-Route::get('account/login',[AccountController::class, 'register'])->name('account.register');
+Route::group(['prefix' => 'account'], function(){
+
+    Route::group(['middleware' => 'guest'], function(){
+        Route::get('account/register',[AccountController::class,'register'])->name('account.register');
+        Route::post('account/register',[AccountController::class,'processRegister'])->name('account.processRegister');
+        Route::get('account/login',[AccountController::class, 'login'])->name('account.login');
+        Route::post('account/login',[AccountController::class, 'authenticate'])->name('account.authenticate');
+    
+});
+
+    Route::group(['middleware' => 'auth'], function(){
+        Route::get('account/profile',[AccountController::class, 'profile'])->name('account.profile');
+        Route::get('account/logout',[AccountController::class, 'logout'])->name('account.logout');
+    });
+
+ });

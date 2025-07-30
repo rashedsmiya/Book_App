@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Book Review App</title>
         <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        <link rel="stylesheet" href="{{ asset('css/style.css')}} ">
     </head>
     <body class="bg-light">
         <div class="container-fluid shadow-lg header">
@@ -39,16 +39,16 @@
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
                                                 <input type="text" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Name" >
-                                                <label for="text" class="form-label">Name</label>
+                                                <label for="name" class="form-label">Name</label>
                                                 @error('name')
-                                                    <p class="invalid-feedback">{{$message}}</p>
+                                                    <p class="invalid-feedback">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
-                                                <input type="text" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror" class="form-control" name="email" id="email" placeholder="email@example.com" >
-                                                <label for="text" class="form-label">Email</label>
+                                                <input type="text" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" class="form-control" name="email" id="email" placeholder="email@example.com" >
+                                                <label for="email" class="form-label">Email</label>
                                                 @error('email')
                                                 <p class="Invalid-feedback">{{$message}}</p>
                                                 @enderror
@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
-                                                <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="confirm_password" id="confirm_password" value="" placeholder="Confirm Password" >
+                                                <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" id="password_confirmation" value="" placeholder="Confirm Password" >
                                                 <label for="password" class="form-label">Confirm Password</label>
                                                 @error('password_confirmation')
                                                 <p class="invalid-feedback">{{$message}}</p>
@@ -83,7 +83,7 @@
                                     <div class="col-12">
                                         <hr class="mt-5 mb-4 border-secondary-subtle">
                                         <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-center">
-                                            <a href="login.html" class="link-secondary text-decoration-none">Click here to login</a>
+                                            <a href="{{ route('account.login')}}" class="link-secondary text-decoration-none">Click here to login</a>
                                         </div>
                                     </div>
                                 </div>
