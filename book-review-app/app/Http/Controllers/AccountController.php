@@ -13,7 +13,7 @@ class AccountController extends Controller
     public function register(){ 
         return view('account.register');
     }
-
+    
     // This method will register a user 
     public function processRegister(Request $request){
         $validator = Validator::make($request->all(),[
@@ -34,5 +34,15 @@ class AccountController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
+
+        return redirect()->route('account.login')->with('success', 'You have registerd succesfully');
     }
+
+
+
+    public function login(){
+        return view('account.login');
+    }   
+
+    
 }
