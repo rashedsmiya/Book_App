@@ -4,7 +4,7 @@
 
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
-
+    
     class TaskController extends Controller
     {
         public function index(){
@@ -32,5 +32,18 @@
                 'updated_at' => now(),
             ]);
             return redirect()->route('tasks.index')->with('success','Task Created Successfully');
+        }
+
+        public function destroy($id){
+            $task = DB::table('tasks')->where('id',$id)->first();
+
+            // Delete Imaage file if exists
+            if ($task->image && Storage::disk('public')->exists($task->image)){
+                Storage::disk('public')->delete($task->image);
+            }
+                
+            // Delete Data From database
+            DB::table('tasks')->where('id', $id)->delete();
+            return redirect()->route('tasks.index')->with('Success','Task delete successfully');
         }
     }

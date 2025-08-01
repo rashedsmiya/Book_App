@@ -36,7 +36,12 @@
                     </td>
                     <td>
                        <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                       <button class="btn btn-danger btn-sm">Details</button>
+                       <form action="{{ route('tasks.destroy',$task->id) }}" method="POST" style="display: inline-block;">
+                        @csrf
+
+                           <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are You sure to delete this')">Details</button>
+                       </form>
+                       
                     </td>
                 </tr>
              @endforeach  
